@@ -1,0 +1,53 @@
+<html>
+<head>
+<script language="javascript">
+var arr=new Array("img/sc1.jpg","img/sc2.jpg","img/sc3.jpg","img/sc4.jpg","img/sc5.jpg","img/sc6.jpg","img/sc7.jpg","img/sc8.jpg","img/sc9.jpg","img/sc11.jpg","img/sc12.jpg");
+var i=0;
+function effect()
+{
+	if(i<=10)
+	{
+	document.getElementById("im").src=arr[i];
+	i++;
+	if(i>10)
+		i=0;
+		}
+}
+</script>
+</head>
+<body background="img/aa.jpg" text="#000000"  onLoad="setInterval('effect()',1500)">
+<table width="90%" align="center"  bgcolor="white" border="5" bordercolor="#990000">
+<tr>
+<td colspan="2" align="center">
+<div align="center"><img id="im"src="img/sc4.jpg" width="450px" height="200px"/></div>
+</td>
+</tr>
+<tr>
+<td><h4><center><font color="#6600CC">Item Name</font></center></h4></td><td><h4><center><font color="#6600CC">Item Price</font></center></h4></td>
+</td>
+</tr>
+<tr>
+<td><center>Panipuri</center></td><td><center>Rs. 15.00 per plate</center></td>
+</tr>
+<tr>
+<td><center>Chat</center></td><td><center>Rs. 20.00 per plate</center></td>
+</tr>
+<td><center>Salad</center></td><td><center>Rs. 50.00 to----</center></td>
+</tr>
+<tr>
+<td><center>Ice Cream</center></td><td><center>Rs. 70.00 to----</center></td>
+</tr>
+<tr>
+<td><center>Samosa</center></td><td><center>Rs. 10.00 per piece</center></td>
+</tr>
+<tr>
+<td><center>Pestri</center></td><td><center>Rs. 20.00 per piece</center></td>
+</tr>
+<tr>
+<tr>
+<td><center>-------</center></td><td><center>-------</center></td>
+</tr>
+</table>
+
+</body>
+</html>

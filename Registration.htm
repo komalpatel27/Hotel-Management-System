@@ -1,0 +1,85 @@
+<html>
+<head>
+
+<script Language="JavaScript">
+	function check1()
+	{
+		if(t1.value=="" || t2.value=="" || t3.value=="" || t4.value=="")
+			alert("Please Fill All Required Entries");
+		else if(t2.value!=t3.value)
+			alert("Verify Password is Not match");
+		else
+			window.location.href("inprogress.htm");
+	}
+</script>			
+</head>
+<body background="img/aa.jpg" text="#000000">
+<center>
+  <font face="Algerian" color="#990000" size="6"><u><b>Registration Form</b></u></font> 
+</center>
+<div align="left">
+<br>
+<br> 
+  <table border="0" cellpadding="0" cellspacing="0" width="95%">
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Name</font></td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="t1" size="49">
+        <font color="#FF0000">*</font> </td>
+    </tr>
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">User 
+        Name</font> </td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="t2" size="49">
+        <font color="#FF0000">*</font> </td>
+    </tr>
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Password</font></td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="t3" size="49">
+        <font color="#FF0000">*</font> </td>
+    </tr>
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Verify 
+        Password </font></td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="t4" size="49">
+        <font color="#FF0000">*</font> </td>
+    </tr>
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Country</font></td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="Country" size="49">
+      </td>
+    </tr>
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">City</font></td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="Phone Numbers" size="49">
+      </td>
+    </tr>
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Fax 
+        Numbers with area code</font></td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="Fax Numbers" size="27">
+      </td>
+    </tr>
+    <tr> 
+      <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">E-mail</font></td>
+      <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+        <input type="text" name="e-mail" size="37">
+      </td>
+    </tr>
+    <tr> 
+      <td></td>
+      <td> 
+        <input type="button" value="Submit" name="Submit" onClick="check1()">
+        <input type="reset" value="Reset" name="Reset">
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

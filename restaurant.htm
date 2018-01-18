@@ -1,0 +1,214 @@
+<html>
+<head>
+
+<script language="JavaScript">
+<!--
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+// -->
+
+function MM_timelinePlay(tmLnName, myID) { //v1.2
+  //Copyright 1997 Macromedia, Inc. All rights reserved.
+  var i,j,tmLn,props,keyFrm,sprite,numKeyFr,firstKeyFr,propNum,theObj,firstTime=false;
+  if (document.MM_Time == null) MM_initTimelines(); //if *very* 1st time
+  tmLn = document.MM_Time[tmLnName];
+  if (myID == null) { myID = ++tmLn.ID; firstTime=true;}//if new call, incr ID
+  if (myID == tmLn.ID) { //if Im newest
+    setTimeout('MM_timelinePlay("'+tmLnName+'",'+myID+')',tmLn.delay);
+    fNew = ++tmLn.curFrame;
+    for (i=0; i<tmLn.length; i++) {
+      sprite = tmLn[i];
+      if (sprite.charAt(0) == 's') {
+        if (sprite.obj) {
+          numKeyFr = sprite.keyFrames.length; firstKeyFr = sprite.keyFrames[0];
+          if (fNew >= firstKeyFr && fNew <= sprite.keyFrames[numKeyFr-1]) {//in range
+            keyFrm=1;
+            for (j=0; j<sprite.values.length; j++) {
+              props = sprite.values[j]; 
+              if (numKeyFr != props.length) {
+                if (props.prop2 == null) sprite.obj[props.prop] = props[fNew-firstKeyFr];
+                else        sprite.obj[props.prop2][props.prop] = props[fNew-firstKeyFr];
+              } else {
+                while (keyFrm<numKeyFr && fNew>=sprite.keyFrames[keyFrm]) keyFrm++;
+                if (firstTime || fNew==sprite.keyFrames[keyFrm-1]) {
+                  if (props.prop2 == null) sprite.obj[props.prop] = props[keyFrm-1];
+                  else        sprite.obj[props.prop2][props.prop] = props[keyFrm-1];
+        } } } } }
+      } else if (sprite.charAt(0)=='b' && fNew == sprite.frame) eval(sprite.value);
+      if (fNew > tmLn.lastFrame) tmLn.ID = 0;
+  } }
+}
+
+function MM_timelineGoto(tmLnName, fNew, numGotos) { //v2.0
+  //Copyright 1997 Macromedia, Inc. All rights reserved.
+  var i,j,tmLn,props,keyFrm,sprite,numKeyFr,firstKeyFr,lastKeyFr,propNum,theObj;
+  if (document.MM_Time == null) MM_initTimelines(); //if *very* 1st time
+  tmLn = document.MM_Time[tmLnName];
+  if (numGotos != null)
+    if (tmLn.gotoCount == null) tmLn.gotoCount = 1;
+    else if (tmLn.gotoCount++ >= numGotos) {tmLn.gotoCount=0; return}
+  jmpFwd = (fNew > tmLn.curFrame);
+  for (i = 0; i < tmLn.length; i++) {
+    sprite = (jmpFwd)? tmLn[i] : tmLn[(tmLn.length-1)-i]; //count bkwds if jumping back
+    if (sprite.charAt(0) == "s") {
+      numKeyFr = sprite.keyFrames.length;
+      firstKeyFr = sprite.keyFrames[0];
+      lastKeyFr = sprite.keyFrames[numKeyFr - 1];
+      if ((jmpFwd && fNew<firstKeyFr) || (!jmpFwd && lastKeyFr<fNew)) continue; //skip if untouchd
+      for (keyFrm=1; keyFrm<numKeyFr && fNew>=sprite.keyFrames[keyFrm]; keyFrm++);
+      for (j=0; j<sprite.values.length; j++) {
+        props = sprite.values[j];
+        if (numKeyFr == props.length) propNum = keyFrm-1 //keyframes only
+        else propNum = Math.min(Math.max(0,fNew-firstKeyFr),props.length-1); //or keep in legal range
+        if (sprite.obj != null) {
+          if (props.prop2 == null) sprite.obj[props.prop] = props[propNum];
+          else        sprite.obj[props.prop2][props.prop] = props[propNum];
+      } }
+    } else if (sprite.charAt(0)=='b' && fNew == sprite.frame) eval(sprite.value);
+  }
+  tmLn.curFrame = fNew;
+  if (tmLn.ID == 0) eval('MM_timelinePlay(tmLnName)');
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_initTimelines() { //v4.0
+    //MM_initTimelines() Copyright 1997 Macromedia, Inc. All rights reserved.
+    var ns = navigator.appName == "Netscape";
+    var ns4 = (ns && parseInt(navigator.appVersion) == 4);
+    var ns5 = (ns && parseInt(navigator.appVersion) > 4);
+    var macIE5 = (navigator.platform ? (navigator.platform == "MacPPC") : false) && (navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4);
+    document.MM_Time = new Array(1);
+    document.MM_Time[0] = new Array(3);
+    document.MM_Time["Timeline1"] = document.MM_Time[0];
+    document.MM_Time[0].MM_Name = "Timeline1";
+    document.MM_Time[0].fps = 15;
+    document.MM_Time[0][0] = new String("sprite");
+    document.MM_Time[0][0].slot = 1;
+    if (ns4)
+        document.MM_Time[0][0].obj = document["Layer1"];
+    else if (ns5)
+        document.MM_Time[0][0].obj = document.getElementById("Layer1");
+    else
+        document.MM_Time[0][0].obj = document.all ? document.all["Layer1"] : null;
+    document.MM_Time[0][0].keyFrames = new Array(1, 10, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 65);
+    document.MM_Time[0][0].values = new Array(2);
+    if (ns5 || macIE5)
+        document.MM_Time[0][0].values[0] = new Array("10px", "14px", "16px", "20px", "25px", "32px", "40px", "50px", "63px", "83px", "91px", "100px", "108px", "117px", "126px", "136px", "145px", "155px", "165px", "175px", "186px", "196px", "207px", "219px", "230px", "242px", "255px", "267px", "280px", "293px", "306px", "320px", "333px", "345px", "357px", "369px", "381px", "392px", "403px", "414px", "425px", "435px", "445px", "454px", "464px", "473px", "482px", "490px", "499px", "507px", "515px", "523px", "525px", "527px", "530px", "534px", "540px", "547px", "555px", "565px", "605px", "609px", "611px", "611px", "612px");
+    else
+        document.MM_Time[0][0].values[0] = new Array(10,14,16,20,25,32,40,50,63,83,91,100,108,117,126,136,145,155,165,175,186,196,207,219,230,242,255,267,280,293,306,320,333,345,357,369,381,392,403,414,425,435,445,454,464,473,482,490,499,507,515,523,525,527,530,534,540,547,555,565,605,609,611,611,612);
+    document.MM_Time[0][0].values[0].prop = "left";
+    if (ns5 || macIE5)
+        document.MM_Time[0][0].values[1] = new Array("201px", "208px", "215px", "222px", "228px", "232px", "235px", "237px", "240px", "242px", "243px", "243px", "243px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "244px", "243px", "243px", "243px", "243px", "242px", "242px", "242px", "242px", "242px", "241px", "241px", "241px", "241px", "240px", "240px", "240px", "240px", "240px", "240px", "239px", "239px", "239px", "239px", "238px", "238px", "238px", "237px", "236px", "235px", "234px", "232px", "222px", "211px", "199px", "187px", "175px");
+    else
+        document.MM_Time[0][0].values[1] = new Array(201,208,215,222,228,232,235,237,240,242,243,243,243,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,243,243,243,243,242,242,242,242,242,241,241,241,241,240,240,240,240,240,240,239,239,239,239,238,238,238,237,236,235,234,232,222,211,199,187,175);
+    document.MM_Time[0][0].values[1].prop = "top";
+    if (!ns4) {
+        document.MM_Time[0][0].values[0].prop2 = "style";
+        document.MM_Time[0][0].values[1].prop2 = "style";
+    }
+    document.MM_Time[0][1] = new String("behavior");
+    document.MM_Time[0][1].frame = 66;
+    document.MM_Time[0][1].value = "MM_timelineGoto('Timeline1','1')";
+    document.MM_Time[0][2] = new String("sprite");
+    document.MM_Time[0][2].slot = 2;
+    if (ns4)
+        document.MM_Time[0][2].obj = document["Layer2"];
+    else if (ns5)
+        document.MM_Time[0][2].obj = document.getElementById("Layer2");
+    else
+        document.MM_Time[0][2].obj = document.all ? document.all["Layer2"] : null;
+    document.MM_Time[0][2].keyFrames = new Array(1, 6, 12, 15, 21, 24, 26, 39, 41, 43, 50, 53, 59, 70, 78, 81, 83, 84, 85, 86, 87, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 156, 183, 191, 194, 195);
+    document.MM_Time[0][2].values = new Array(2);
+    if (ns5 || macIE5)
+        document.MM_Time[0][2].values[0] = new Array("640px", "637px", "635px", "632px", "629px", "624px", "618px", "612px", "605px", "598px", "591px", "585px", "577px", "569px", "560px", "552px", "543px", "533px", "523px", "515px", "507px", "499px", "493px", "488px", "481px", "472px", "468px", "464px", "459px", "455px", "449px", "444px", "438px", "433px", "428px", "423px", "419px", "415px", "411px", "404px", "399px", "397px", "389px", "382px", "374px", "364px", "353px", "343px", "333px", "324px", "312px", "303px", "293px", "286px", "279px", "271px", "263px", "254px", "244px", "237px", "230px", "223px", "216px", "208px", "200px", "192px", "184px", "177px", "171px", "165px", "159px", "154px", "150px", "147px", "145px", "143px", "142px", "142px", "148px", "156px", "164px", "174px", "182px", "190px", "196px", "199px", "202px", "203px", "205px", "206px", "207px", "208px", "210px", "211px", "213px", "214px", "216px", "217px", "219px", "220px", "222px", "224px", "225px", "227px", "229px", "231px", "233px", "235px", "237px", "239px", "241px", "243px", "245px", "247px", "249px", "250px", "252px", "254px", "256px", "258px", "259px", "261px", "262px", "264px", "266px", "267px", "268px", "270px", "271px", "273px", "274px", "275px", "277px", "278px", "279px", "280px", "282px", "283px", "284px", "284px", "284px", "284px", "285px", "285px", "286px", "286px", "286px", "292px", "299px", "307px", "316px", "326px", "337px", "349px", "363px", "378px", "384px", "390px", "397px", "403px", "410px", "417px", "424px", "431px", "439px", "446px", "454px", "462px", "470px", "478px", "485px", "493px", "500px", "507px", "513px", "520px", "526px", "532px", "537px", "543px", "548px", "553px", "558px", "568px", "574px", "578px", "581px", "582px", "582px", "583px", "586px", "596px", "606px", "613px", "618px");
+    else
+        document.MM_Time[0][2].values[0] = new Array(640,637,635,632,629,624,618,612,605,598,591,585,577,569,560,552,543,533,523,515,507,499,493,488,481,472,468,464,459,455,449,444,438,433,428,423,419,415,411,404,399,397,389,382,374,364,353,343,333,324,312,303,293,286,279,271,263,254,244,237,230,223,216,208,200,192,184,177,171,165,159,154,150,147,145,143,142,142,148,156,164,174,182,190,196,199,202,203,205,206,207,208,210,211,213,214,216,217,219,220,222,224,225,227,229,231,233,235,237,239,241,243,245,247,249,250,252,254,256,258,259,261,262,264,266,267,268,270,271,273,274,275,277,278,279,280,282,283,284,284,284,284,285,285,286,286,286,292,299,307,316,326,337,349,363,378,384,390,397,403,410,417,424,431,439,446,454,462,470,478,485,493,500,507,513,520,526,532,537,543,548,553,558,568,574,578,581,582,582,583,586,596,606,613,618);
+    document.MM_Time[0][2].values[0].prop = "left";
+    if (ns5 || macIE5)
+        document.MM_Time[0][2].values[1] = new Array("418px", "427px", "435px", "444px", "453px", "461px", "468px", "474px", "481px", "486px", "491px", "495px", "499px", "500px", "499px", "497px", "494px", "490px", "486px", "483px", "480px", "477px", "474px", "472px", "475px", "465px", "459px", "452px", "444px", "436px", "427px", "417px", "407px", "397px", "388px", "380px", "372px", "365px", "359px", "349px", "347px", "342px", "339px", "338px", "336px", "335px", "333px", "332px", "331px", "331px", "334px", "339px", "345px", "347px", "350px", "352px", "355px", "358px", "364px", "368px", "373px", "377px", "382px", "388px", "393px", "399px", "405px", "411px", "417px", "424px", "433px", "442px", "452px", "461px", "469px", "477px", "485px", "492px", "503px", "507px", "511px", "517px", "521px", "525px", "528px", "529px", "529px", "536px", "544px", "552px", "560px", "568px", "576px", "585px", "594px", "603px", "612px", "621px", "631px", "641px", "651px", "661px", "672px", "683px", "694px", "705px", "717px", "729px", "741px", "754px", "766px", "779px", "792px", "804px", "816px", "828px", "839px", "850px", "861px", "871px", "882px", "892px", "902px", "912px", "921px", "930px", "939px", "948px", "957px", "965px", "973px", "981px", "989px", "997px", "1004px", "1004px", "1003px", "1001px", "994px", "986px", "982px", "978px", "975px", "973px", "972px", "971px", "970px", "960px", "949px", "937px", "923px", "908px", "892px", "875px", "857px", "838px", "831px", "824px", "817px", "810px", "803px", "796px", "788px", "781px", "773px", "766px", "758px", "750px", "742px", "735px", "727px", "720px", "712px", "705px", "699px", "692px", "686px", "679px", "673px", "667px", "661px", "656px", "650px", "637px", "626px", "617px", "609px", "601px", "594px", "587px", "581px", "570px", "565px", "561px", "551px");
+    else
+        document.MM_Time[0][2].values[1] = new Array(418,427,435,444,453,461,468,474,481,486,491,495,499,500,499,497,494,490,486,483,480,477,474,472,475,465,459,452,444,436,427,417,407,397,388,380,372,365,359,349,347,342,339,338,336,335,333,332,331,331,334,339,345,347,350,352,355,358,364,368,373,377,382,388,393,399,405,411,417,424,433,442,452,461,469,477,485,492,503,507,511,517,521,525,528,529,529,536,544,552,560,568,576,585,594,603,612,621,631,641,651,661,672,683,694,705,717,729,741,754,766,779,792,804,816,828,839,850,861,871,882,892,902,912,921,930,939,948,957,965,973,981,989,997,1004,1004,1003,1001,994,986,982,978,975,973,972,971,970,960,949,937,923,908,892,875,857,838,831,824,817,810,803,796,788,781,773,766,758,750,742,735,727,720,712,705,699,692,686,679,673,667,661,656,650,637,626,617,609,601,594,587,581,570,565,561,551);
+    document.MM_Time[0][2].values[1].prop = "top";
+    if (!ns4) {
+        document.MM_Time[0][2].values[0].prop2 = "style";
+        document.MM_Time[0][2].values[1].prop2 = "style";
+    }
+    document.MM_Time[0].lastFrame = 195;
+    for (i=0; i<document.MM_Time.length; i++) {
+        document.MM_Time[i].ID = null;
+        document.MM_Time[i].curFrame = 0;
+        document.MM_Time[i].delay = 1000/document.MM_Time[i].fps;
+    }
+}
+//-->
+</script>
+</head>
+<body background="img/aa.jpg" text="#000000" onLoad="MM_preloadImages('img/res2.jpg');MM_timelinePlay('Timeline1')">
+<div id="Layer1" style="position:absolute; left:10px; top:201px; width:78px; height:67px; z-index:1"><img src="img/food1.jpg" width="141" height="101"></div>
+<div id="Layer2" style="position:absolute; left:640px; top:418px; width:102px; height:83px; z-index:2"><img src="img/food2.jpg" width="140" height="100"></div>
+<div align="center"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','img/res1.jpg',1)"><img name="Image3" border="0" src="img/RES.jpg" width="426" height="91"></a></div><br>
+<br>
+<br>
+<table width="95%" align="center" border="5" bordercolor="#990000" bgcolor="#FFFFFF">
+  <tr> 
+    <td> 
+<center>
+<img src="img/res1.jpg" width="325px" height="200px">
+<img src="img/11 (1).jpg" width="325px" height="200px">
+<img src="img/11 (3).jpg" width="325px" height="200px">
+</center>
+<hr size="2" color="#990000">
+
+      <p align="center"><br>
+        <font face="Arial, Helvetica, sans-serif">THE OVAL :- For the connoisseurs 
+        of tandoori nights and gourmet delights. The oval is all about relaxing 
+        interiors, traditional and oriental splashes, spacious covers, heart warming 
+        service and the most authentic palette.</font></p>
+      <p>&nbsp;</p>
+      <p align="center"><font face="Arial, Helvetica, sans-serif"><br>
+        &quot;Intermingling of Varied Cultures, the art of co-existance, where 
+        each of oneretains its distinct identity. To savour the joy of unity in 
+        diversity as you treat yourself to the best of cuisine from the world's 
+        greatest and oldest civilizations, made possible by our highly competent 
+        chef.&quot;</font></p>
+      <p align="center"><font face="Arial, Helvetica, sans-serif"><br>
+        GLASSY JUNCTION (The Pub):- Glassy junction is a place that reverberates 
+        with youthful energy. It&#146;s a place that lets the spirits soar high 
+        even while allowing you to let your hair down.It&#146;s a place that&#146;s 
+        Hip, Hot and Happening and transcends the boundaries of imagination, from 
+        rollicking rock music to pleasant pop melodies.</font></p>
+      <p><font face="Arial, Helvetica, sans-serif"><br>
+        Eggspectation (24x7 Resto ~ Cafe):- Enjoy live Grills on your table!<br>
+        </font> </p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

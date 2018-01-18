@@ -1,0 +1,171 @@
+<html>
+<head>
+<script language="JavaScript">
+	function check()
+	{
+		if(f1.Name.value=="" || f1.Address.value=="" || f1.Nationality.value=="" || f1.City.value=="" || f1.Country.value=="")
+			alert("Please Fill All Entries");
+		else
+			window.location.href("inprogress.htm");
+	}
+</script>
+</head>
+
+<body topmargin="0" leftmargin="0" background="img/aa.jpg" >
+<table align="center" width="900" height="300">
+<tr>
+<td>
+<center>
+<img src="img/4.jpg" width="450" align="right" height="250"> 
+   <div align="left">
+     <p><font size="4" face="Andalus"> Sarovar Hotel - Ahmedabad<br>
+       General Manager - Bernard Fernandez<br>
+       Bhawan's College Road, Khanpur<br>
+       Ahmedabad - 380 001.<br>
+       Gujarat, India<br>
+       Tel.: +91 79 2560 1111<br>
+       Fax: +91 79 2560 1122<br>
+       Email: apo@sarovarhotels.com </font></p>
+   </div></center>
+</td></tr></table>
+ <center>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr> 
+        <td width="5%"></td>
+        <td width="95%" style="padding-right: 20"> 
+          <p style="margin-top: 10"><font face="MS Sans Serif" size="3">For advance 
+            reservations and other queries please feel free to get in <a href=" Email: apo@sarovarhotels.com"> 
+            touch</a> with us. Alternatively you may fill up the query form and 
+            submit the same to us, for us to reserve the room / rooms for you 
+            and your co-travelers to Allahabad. It will be our pleasure to play 
+            a perfect host to a perfect guest like you.</font></p>
+          <p style="margin-top: 10" align="center"><b><font face="Algerian" size="5" color="#800000"><u>RESERVATION 
+            FORM</u></font></b></p>
+        <br>
+		<br>
+          <form method="POST" action="fpmail.cgi" name="f1">
+            <div align="left"> 
+              <table border="0" cellpadding="0" cellspacing="0" width="95%">
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Name</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Name" size="41">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Nationality</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Nationality" size="24">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Address</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Address" size="49">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">City</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="City" size="24">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Country</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Country" size="24">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Phone 
+                    Numbers with area code</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Phone Numbers" size="27">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Fax 
+                    Numbers with area code</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Fax Numbers" size="27">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">e-mail</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="e-mail" size="37">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" rowspan="2"><font face="MS Sans Serif" size="2">Type 
+                    of Room Required. Check your preference</font></td>
+                  <td width="18%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"> 
+                    <p align="center"> 
+                      <input type="checkbox" name="Room Type A/c Deluxe" value="ON">
+                  </td>
+                  <td width="18%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">A/c 
+                    Deluxe</font></td>
+                  <td width="18%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"> 
+                    <p align="center"> 
+                      <input type="checkbox" name="Room Type A/c " value="ON">
+                  </td>
+                  <td width="17%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">A/c 
+                    </font></td>
+                </tr>
+                <tr> 
+                  <td width="18%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"> 
+                    <p align="center"> 
+                      <input type="checkbox" name="Room Type Air Cooled" value="ON">
+                  </td>
+                  <td width="18%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Air 
+                    Cooled</font></td>
+                  <td width="18%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"> 
+                    <p align="center"> 
+                      <input type="checkbox" name="Room Type Ordinary" value="ON">
+                  </td>
+                  <td width="17%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Ordinary</font></td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">No 
+                    of guests </font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="No. of guests" size="4">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Expected 
+                    date of arrival </font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Expected Date of arrival" size="11">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Expected 
+                    days of stay</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <input type="text" name="Expected days of stay" size="4">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="29%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5"><font face="MS Sans Serif" size="2">Any 
+                    other information you would like us to have to help us serve 
+                    you better</font></td>
+                  <td width="71%" style="padding-left: 10; padding-right: 10; padding-top: 5; padding-bottom: 5" colspan="4"> 
+                    <textarea rows="2" name="Any other info" cols="46"></textarea>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <p style="margin-top: 10" align="center"> 
+              <input type="button" value="Submit" name="Submit" onClick="check()">
+              <input type="reset" value="Reset" name="Reset">
+            </p>
+          </form>
+        </td>
+      </tr>
+    </table>
+</center>
+</div>
+<br>
+</body>
+</html>

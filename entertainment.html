@@ -1,0 +1,49 @@
+<html>
+<head>
+<script language="javascript">
+var arr=new Array("img/disco.jpg","img/e.jpg","img/iee.jpg","img/t.jpg");
+var i=0;
+function effect()
+{
+	if(i<=3)
+	{
+	document.getElementById("im").src=arr[i];
+	i++;
+	if(i>3)
+		i=0;
+		}
+}</script></head>
+<body background="img/aa.jpg"  onLoad="setInterval('effect()',1500)">
+<center>
+<img src="img/enr.jpg" width="400px">
+</center>
+<br>
+<table width="98%" align="center" bgcolor="#FFFFFF"  border="5" bordercolor="#990000">
+  <tr> <td>
+    <center>
+	<div align="center"><img id="im"src="img/disco.jpg" width="600px" height="250px"/></div>
+	</center>
+	<br>
+      <hr style="color:"#6600CC"; height:5px">
+	  <table width="98%" border="5" align="center" bordercolor="#990000" bgcolor="#FFFFFF">
+             <tr> 
+          <td width="60%"><b>Recreational Facilities</b></td>
+          <td width="40%"><b>Opening Hours</b></td>
+        </tr>
+        <tr> 
+          <td width="60%">Disco</td>
+          <td width="40%">7:00 PM to 12:00 AM</td>
+        </tr>
+        <tr> 
+          <td width="60%">Kids Play Grounds</td>
+          <td width="40%">24 Hours</td>
+        </tr>
+		<tr> 
+          <td width="60%">Other Games</td>
+          <td width="40%">12:00 PM to 12:00 AM</td>
+	    </tr>
+      </table> </td>
+  </tr>
+</table>
+</body>
+</html>

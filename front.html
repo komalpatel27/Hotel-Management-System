@@ -1,0 +1,61 @@
+<html>
+<head>
+
+
+<script language="javascript">
+var arr=new Array("img/1.jpg","img/3.jpg","img/2.jpg","img/(2).jpg","img/hotel1.jpg");
+var i=0;
+function effect()
+{
+	if(i<=4)
+	{
+	document.getElementById("im").src=arr[i];
+	i++;
+	if(i>4)
+		i=0;
+		}
+}
+	function validate ()
+	{
+	if (f1.t1.value=="hotel"&& f1.t2.value=="hotel")
+	{
+	open("mainpage.html")
+	}
+	else
+	{
+	alert("please input correct user name and possword");
+	f1.t1.value==" ";
+	f1.t2.value==" ";
+	f1.t1.focus();
+	f1.t2.focus();
+	return
+	}}
+	</script>
+</head>
+<body background="img/9 (7).jpg" text="#000000" onLoad="setInterval('effect()',1500)">
+<center>
+<b><font face="Georgia, Times New Roman, Times, serif" color="#990000" size="8"><b>Hotel Management for</font></b>
+<br>
+<b><font face="Georgia, Times New Roman, Times, serif" color="#990000" size="7"><b>Sarover Hotel</font></b>
+<br>
+<hr> 
+<h1 align="center"><img id="im"src="img/1.jpg" width="900px" height="500px"/></h1>
+
+<form name="f1">
+<table width="400px" align="right"  >
+<tr>
+<td>User Name </td>
+<td><input type="text" name="t1"></td>
+</tr>
+<tr>
+<td>Password</td>
+<td> <input type="password" name="t2"></td>
+</tr>
+<tr>
+<td></td>
+ <td><input type="button" value="Login" onClick="validate ()"></td>
+ </tr>
+ </table>
+ </form>
+ </body>
+</html>
